@@ -1,1 +1,9 @@
 Sistema de Galpões e Estoque
+
+<h2>Gapões</h2>
+<% @warehouses.each do |w| %>
+  <%= w.name %>
+  Código: <%= w.code %>
+  Cidade: <%= w.city %>
+  <%= w.area %> M²
+<% end %>
