@@ -7,3 +7,7 @@ Sistema de Galpões e Estoque
   Cidade: <%= w.city %>
   <%= w.area %> M²
 <% end %>
+
+<% if @warehouses.empty? %>
+  <p>Não existem galpões cadastrados</p>
+<% end%>
