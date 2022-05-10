@@ -1,11 +1,11 @@
-Sistema de Galpões e Estoque
+<h1>Sistema de Galpões e Estoque</h1>
 
-<h2>Gapões</h2>
+<h2>Galpões</h2>
 <% @warehouses.each do |w| %>
-  <%= w.name %>
+  <%= link_to(w.name, warehouse_path(w.id)) %>
   Código: <%= w.code %>
   Cidade: <%= w.city %>
-  <%= w.area %> M²
+  <%= w.area %> m²
 <% end %>
 
 <% if @warehouses.empty? %>
