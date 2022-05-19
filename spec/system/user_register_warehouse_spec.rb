@@ -23,6 +23,7 @@ describe 'Usuário cadastra um galpão' do
 
     # Act
     visit root_path
+    expect(page).not_to have_content 'Galpão cadastrado com sucesso.'
     click_on 'Cadastrar Galpão'
     fill_in 'Nome', with: 'Rio de Janeiro'
     fill_in 'Descrição', with: 'Galpão da zona portuária do Rio'
@@ -35,6 +36,7 @@ describe 'Usuário cadastra um galpão' do
 
     # Assert
     expect(current_path).to eq root_path
+    expect(page).to have_content 'Galpão cadastrado com sucesso.'
     expect(page).to have_content 'Rio de Janeiro'
     expect(page).to have_content 'RIO'
     expect(page).to have_content '32000 m²'
