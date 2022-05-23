@@ -97,6 +97,22 @@ RSpec.describe Warehouse, type: :model do
       expect(result).to eq false
     end
 
+    it 'false when name is already in use' do
+      # Arrange
+      first_warehouse = Warehouse.create(name: 'Rio', code: 'RIO', address: 'Endereço',
+                                        cep: '25000-000', city: 'Rio', area: 1000,
+                                        description: 'Alguma descrição')
+
+      second_warehouse = Warehouse.new(name: 'Rio', code: 'NTR', address: 'Avenida',
+                                      cep: '35000-000', city: 'Niteroi', area: 1500,
+                                      description: 'Outra descrição')
+      # Act
+      result = second_warehouse.valid?
+
+      # Assert
+      expect(result).to eq false
+    end
+
     context 'cep format (00000-000)' do
       it 'false when CEP is in wrong format (10010-1000)' do
         # Arrange
