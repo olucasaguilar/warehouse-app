@@ -107,5 +107,40 @@ RSpec.describe Supplier, type: :model do
       # Assert
       expect(result).to eq false
     end
+
+    context 'format' do
+      it 'false when registration number is not with 13 characters' do
+        # Arrange
+        supplier = Supplier.new(corporate_name: 'ACME LTDA', brand_name: 'ACME', registration_number: 12597851236,
+                                full_address: 'Av das Palmas, 100', city: 'Bauru', state: 'SP', email: 'acme@gmail.com',
+                                phone_number: '(45)12345-1234')
+        # Act
+        result = supplier.valid?
+        # Assert
+        expect(result).to eq false
+      end
+      
+      it 'true when registration number is with 13 characters' do
+        # Arrange
+        supplier = Supplier.new(corporate_name: 'ACME LTDA', brand_name: 'ACME', registration_number: '1259785123657',
+                                full_address: 'Av das Palmas, 100', city: 'Bauru', state: 'SP', email: 'acme@gmail.com',
+                                phone_number: '(45)12345-1234')
+        # Act
+        result = supplier.valid?
+        # Assert
+        expect(result).to eq true
+      end
+      
+      it 'false when registration number is not only integers' do
+        # Arrange
+        supplier = Supplier.new(corporate_name: 'ACME LTDA', brand_name: 'ACME', registration_number: '12sa785123657',
+                                full_address: 'Av das Palmas, 100', city: 'Bauru', state: 'SP', email: 'acme@gmail.com',
+                                phone_number: '(45)12345-1234')
+        # Act
+        result = supplier.valid?
+        # Assert
+        expect(result).to eq false
+      end
+    end
   end
 end

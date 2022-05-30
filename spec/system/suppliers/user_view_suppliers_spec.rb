@@ -17,7 +17,7 @@ describe 'Usuário visualiza fornecedores' do
     # Arrange
     Supplier.create!(corporate_name: 'ACME LTDA', brand_name: 'ACME', registration_number: '1259647851236',
                     full_address: 'Av das Palmas, 100', city: 'Bauru', state: 'SP', email: 'acme@gmail.com')
-    Supplier.create!(corporate_name: 'Spark Industries LTDS', brand_name: 'Spark', registration_number: '5436954785',
+    Supplier.create!(corporate_name: 'Spark Industries LTDS', brand_name: 'Spark', registration_number: '7894561237896',
                     full_address: 'Bairro Nova Aparecida', city: 'Piedade', state: 'PR', email: 'spark@gmail.com')
     # Act
     visit root_path
