@@ -3,6 +3,7 @@ require 'rails_helper'
 describe 'Usuário cadastra um modelo de produto' do
   it 'com sucesso' do
     # Arrange
+    user = User.create!(name: 'Lucas', email: 'lucas@gmail.com', password: 'password')
     supplier = Supplier.create!(corporate_name: 'ACME LTDA', brand_name: 'ACME', 
                                 registration_number: 1259647851236, full_address: 'Av das Palmas, 100', 
                                 city: 'Bauru', state: 'SP', email: 'acme@gmail.com', 
@@ -12,6 +13,7 @@ describe 'Usuário cadastra um modelo de produto' do
                                 city: 'Bauru', state: 'SP', email: 'contato@lg.com', 
                                 phone_number: '(55)65432-1452')
     # Act
+    login_as(user)
     visit root_path
     click_on 'Modelos de Produtos'
     click_on 'Cadastrar Novo'
@@ -34,11 +36,13 @@ describe 'Usuário cadastra um modelo de produto' do
 
   it 'deve preencher todos os campos' do
     # Arrange
+    user = User.create!(name: 'Lucas', email: 'lucas@gmail.com', password: 'password')
     supplier = Supplier.create!(corporate_name: 'ACME LTDA', brand_name: 'ACME', 
                                 registration_number: 1259647851236, full_address: 'Av das Palmas, 100', 
                                 city: 'Bauru', state: 'SP', email: 'acme@gmail.com', 
                                 phone_number: '(45)12345-1234')
     # Act
+    login_as(user)
     visit root_path
     click_on 'Modelos de Produtos'
     click_on 'Cadastrar Novo'

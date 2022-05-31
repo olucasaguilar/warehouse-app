@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 describe 'Usuário vê modelos de produtos' do
-  it 'a partir do menu' do
+
+  it 'se estiver autenticado' do
     # Arrange
 
     # Act
@@ -10,11 +11,25 @@ describe 'Usuário vê modelos de produtos' do
       click_on 'Modelos de Produtos'
     end
     # Assert
-    expect(current_path).to eq product_models_path 
+    expect(current_path).to eq new_user_session_path
+  end
+
+  it 'a partir do menu' do
+    # Arrange
+    user = User.create!(name: 'Lucas', email: 'lucas@gmail.com', password: 'password')
+    # Act
+    visit root_path
+    login(user)
+    within('nav') do
+      click_on 'Modelos de Produtos'
+    end
+    # Assert
+    expect(current_path).to eq product_models_path
   end
 
   it 'com sucesso' do
     # Arrange
+    user = User.create!(name: 'Lucas', email: 'lucas@gmail.com', password: 'password')
     supplier = Supplier.create!(brand_name: 'Samsung', corporate_name: 'Samsung Eletronicos LTDA',
                                 registration_number: '1234567891234', full_address: 'Av Nacoes,1000',
                                 city: 'São Paulo', state: 'SP', email: 'sac@samsung.com')
@@ -23,6 +38,7 @@ describe 'Usuário vê modelos de produtos' do
     ProductModel.create!(name: 'SoundBar 7.1 Surround', weight: 3000, width: 80, height: 15, 
                          depth: 20, sku: 'SOU751-SA8MSU-NOIZ77', supplier: supplier)
     # Act
+    login_as(user)
     visit root_path
     within('nav') do
       click_on 'Modelos de Produtos'
@@ -38,8 +54,9 @@ describe 'Usuário vê modelos de produtos' do
 
   it 'e não existem produtos cadastrados' do
     # Arrange
-
+    user = User.create!(name: 'Lucas', email: 'lucas@gmail.com', password: 'password')
     # Act
+    login_as(user)
     visit root_path
     click_on 'Modelos de Produtos'
 
